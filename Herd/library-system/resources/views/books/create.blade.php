@@ -11,22 +11,36 @@
         
         <div style="margin-bottom: 10px;">
             <label>Judul Buku:</label><br>
-            <input type="text" name="title" required style="width: 100%;">
+            <!-- Atribut required dihapus, diganti value="{{ old('title') }}" -->
+            <input type="text" name="title" value="{{ old('title') }}" style="width: 100%;">
+            <!-- Menampilkan pesan error jika validasi gagal -->
+            @error('title')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
         </div>
         
         <div style="margin-bottom: 10px;">
             <label>Penulis:</label><br>
-            <input type="text" name="author" required style="width: 100%;">
+            <input type="text" name="author" value="{{ old('author') }}" style="width: 100%;">
+            @error('author')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
         </div>
         
         <div style="margin-bottom: 10px;">
-            <label>Tahun Terbit:</label><br>
-            <input type="number" name="year" required style="width: 100%;">
+            <label>Tahun Terbit (4 digit):</label><br>
+            <input type="number" name="year" value="{{ old('year') }}" style="width: 100%;">
+            @error('year')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
         </div>
         
         <div style="margin-bottom: 20px;">
             <label>Stok:</label><br>
-            <input type="number" name="stock" required style="width: 100%;">
+            <input type="number" name="stock" value="{{ old('stock') }}" style="width: 100%;">
+            @error('stock')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
         </div>
         
         <button type="submit" style="padding: 5px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">

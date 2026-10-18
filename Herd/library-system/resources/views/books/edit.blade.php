@@ -12,23 +12,35 @@
         
         <div style="margin-bottom: 10px;">
             <label>Judul Buku:</label><br>
-            <!-- value="..." digunakan untuk me-render data lama ke dalam kotak input -->
-            <input type="text" name="title" value="{{ $book->title }}" required style="width: 100%;">
+            <!-- required dihapus, value menggunakan old() dengan fallback ke data database -->
+            <input type="text" name="title" value="{{ old('title', $book->title) }}" style="width: 100%;">
+            @error('title')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
         </div>
         
         <div style="margin-bottom: 10px;">
             <label>Penulis:</label><br>
-            <input type="text" name="author" value="{{ $book->author }}" required style="width: 100%;">
+            <input type="text" name="author" value="{{ old('author', $book->author) }}" style="width: 100%;">
+            @error('author')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
         </div>
         
         <div style="margin-bottom: 10px;">
-            <label>Tahun Terbit:</label><br>
-            <input type="number" name="year" value="{{ $book->year }}" required style="width: 100%;">
+            <label>Tahun Terbit (4 digit):</label><br>
+            <input type="number" name="year" value="{{ old('year', $book->year) }}" style="width: 100%;">
+            @error('year')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
         </div>
         
         <div style="margin-bottom: 20px;">
             <label>Stok:</label><br>
-            <input type="number" name="stock" value="{{ $book->stock }}" required style="width: 100%;">
+            <input type="number" name="stock" value="{{ old('stock', $book->stock) }}" style="width: 100%;">
+            @error('stock')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
         </div>
         
         <button type="submit" style="padding: 5px 15px; background-color: #ff9800; color: white; border: none; cursor: pointer;">
