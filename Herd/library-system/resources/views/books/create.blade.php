@@ -6,19 +6,34 @@
     
     <!-- Form mengarah ke route 'books.store' menggunakan method POST -->
     <form action="{{ route('books.store') }}" method="POST" style="max-width: 400px;">
-        <!-- Wajib menambahkan @csrf untuk keamanan dari serangan Cross-Site Request Forgery -->
+        <!-- Wajib menambahkan @csrf untuk keamanan -->
         @csrf
         
         <div style="margin-bottom: 10px;">
             <label>Judul Buku:</label><br>
-            <!-- Atribut required dihapus, diganti value="{{ old('title') }}" -->
             <input type="text" name="title" value="{{ old('title') }}" style="width: 100%;">
-            <!-- Menampilkan pesan error jika validasi gagal -->
             @error('title')
                 <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
             @enderror
         </div>
         
+        <!-- ================= BLOK KATEGORI ================= -->
+        <div style="margin-bottom: 10px;">
+            <label>Kategori:</label><br>
+            <select name="category_id" style="width: 100%; padding: 4px;">
+                <option value="">-- Pilih Kategori --</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('category_id')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
+        </div>
+        <!-- ================================================= -->
+
         <div style="margin-bottom: 10px;">
             <label>Penulis:</label><br>
             <input type="text" name="author" value="{{ old('author') }}" style="width: 100%;">

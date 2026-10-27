@@ -4,21 +4,35 @@
 @section('content')
     <h2>Edit Data Buku</h2>
     
-    <!-- Form mengarah ke route 'books.update' dengan menyisipkan parameter objek buku ($book) -->
-    <form action="{{ route('books.update', $book) }}" method="POST" style="max-width: 400px;">
+    <form action="{{ route('books.update', $book->id) }}" method="POST" style="max-width: 400px;">
         @csrf
-        <!-- Mengubah HTTP method dasar POST menjadi PUT untuk proses update (syarat standar RESTful Laravel) -->
         @method('PUT')
         
         <div style="margin-bottom: 10px;">
             <label>Judul Buku:</label><br>
-            <!-- required dihapus, value menggunakan old() dengan fallback ke data database -->
             <input type="text" name="title" value="{{ old('title', $book->title) }}" style="width: 100%;">
             @error('title')
                 <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
             @enderror
         </div>
         
+        <!-- ================= BLOK KATEGORI ================= -->
+        <div style="margin-bottom: 10px;">
+            <label>Kategori:</label><br>
+            <select name="category_id" style="width: 100%; padding: 4px;">
+                <option value="">-- Pilih Kategori --</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @selected(old('category_id', $book->category_id) == $category->id)>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('category_id')
+                <div style="color: red; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
+            @enderror
+        </div>
+        <!-- ================================================= -->
+
         <div style="margin-bottom: 10px;">
             <label>Penulis:</label><br>
             <input type="text" name="author" value="{{ old('author', $book->author) }}" style="width: 100%;">
