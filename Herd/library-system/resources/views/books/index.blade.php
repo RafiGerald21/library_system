@@ -2,7 +2,18 @@
 @section('title', 'Daftar Buku')
 
 @section('content')
-    <h2>Daftar Buku</h2>
+    <!-- Header dan Tombol Logout -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="margin: 0;">Daftar Buku</h2>
+        
+        <!-- Form Logout -->
+        <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+            @csrf
+            <button type="submit" style="background-color: #d9534f; color: white; border: none; padding: 6px 14px; cursor: pointer; border-radius: 4px; font-weight: bold;">
+                Logout
+            </button>
+        </form>
+    </div>
 
     <!-- Daftar Buku menggunakan List -->
     <ul>
